@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Resort</title>
+    <link rel="stylesheet" th:href="@{/css/book_resort.css}" />
+
+    <script>
+        function parseDateOnly(dateStr) {
+            if (!dateStr) return null;
+            return new Date(dateStr);
+        }
+    
+        function calculateDaysAndTotal() {
+            const arrivalDate = document.getElementById("arrivalDate").value;
+            const departureDate = document.getElementById("departureDate").value;
+    
+            const arrival = parseDateOnly(arrivalDate);
+            const departure = parseDateOnly(departureDate);
+    
+            if (!arrival || !departure || departure <= arrival) {
+                document.getElementById("days").value = 1;
+                document.getElementById("totalPrice").value = 0;
+                return;
+            }
+    
+            const msPerDay = 1000 * 60 * 60 * 24;
+            let days = Math.ceil((departure - arrival) / msPerDay);
+            document.getElementById("days").value = days;
+    
+            const roomType = document.getElementById("roomType");
+            const selectedOption = roomType.options[roomType.selectedIndex];
+            const price = parseFloat(selectedOption.getAttribute("data-price")) || 0;
+    
+            const rooms = parseInt(document.getElementById("rooms").value || "1");
+    
+            const total = price * rooms * days;
+            document.getElementById("totalPrice").value = total;
+        }
+    
+        window.addEventListener("DOMContentLoaded", function () {
+            const fields = ["arrivalDate", "departureDate", "roomType", "rooms"];
+            fields.forEach(id => {
+                document.getElementById(id).addEventListener("change", calculateDaysAndTotal);
+            });
+        });
+    </script>
+    
+
+    <script th:if="${param.bookingSuccess}">
+        alert('Booking Confirmed! Thank you for booking with us.');
+        window.location.href = "/resorts";
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Book Your Resort</h2>
+
+    <form th:action="@{/book}" th:object="${booking}" method="post">
+        <input type="hidden" th:value="${resortName}" name="resortName"/>
+
+        <label for="username">Your Name</label>
+        <input type="text" id="username" name="username" required/>
+
+        <label for="email">Your Email</label>
+        <!-- <input type="email" id="email" name="email" required/> -->
+        <input type="email" id="email" name="email" th:value="${email}" readonly/>
+
+        <label for="roomType">Select Room Type</label>
+        <select id="roomType" name="roomType" required>
+            <option value="Deluxe Room" data-price="4500">Deluxe Room - ₹4,500</option>
+            <option value="Premium Cottage" data-price="6200">Premium Cottage - ₹6,200</option>
+            <option value="Executive Suite" data-price="9800">Executive Suite - ₹9,800</option>
+            <option value="Family Villa" data-price="12500">Family Villa - ₹12,500</option>
+        </select>
+
+        <label for="guests">Number of Guests</label>
+        <input type="number" id="guests" name="numberOfGuests" min="1" value="1" required/>
+
+        <label for="rooms">Number of Rooms</label>
+        <input type="number" id="rooms" name="numberOfRooms" min="1" value="1" required/>
+
+        <label for="arrivalDate">Arrival Date</label>
+        <input type="date" id="arrivalDate" name="arrivalDate" required/>
+
+        
+
+        <label for="departureDate">Departure Date</label>
+        <input type="date" id="departureDate" name="departureDate" required/>
+
+        
+
+        <label for="days">Number of Days</label>
+        <input type="number" id="days" name="numberOfDays" readonly/>
+
+        <label for="totalPrice">Total Price</label>
+        <input type="text" id="totalPrice" name="totalPrice" readonly/>
+
+        <label for="specialRequests">Special Requests</label>
+        <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Any special instructions..."></textarea>
+
+
+        <button type="submit">Book Now</button>
+    </form>
+</div>
+</body>
+</html>

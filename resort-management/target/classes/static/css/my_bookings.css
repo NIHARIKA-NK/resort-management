@@ -1,0 +1,98 @@
+/* my_bookings.css */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #222;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #f0f0f0;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px 15px;
+    font-size: 16px;
+}
+
+th {
+    font-weight: 600;
+    color: #555;
+}
+
+td {
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+    background-color: #f7f7f7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    td {
+        padding: 10px;
+        text-align: right;
+        position: relative;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-align: left;
+        color: #666;
+    }
+}

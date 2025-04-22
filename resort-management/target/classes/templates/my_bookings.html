@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Bookings</title>
+    <link rel="stylesheet" th:href="@{/css/my_bookings.css}" />
+</head>
+<body>
+    <div class="container">
+        <h2>Your Bookings</h2>
+
+        <div th:if="${bookings.isEmpty()}">
+            <p>You have no bookings yet.</p>
+        </div>
+
+        <table th:if="${!bookings.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>Resort</th>
+                    <th>Room Type</th>
+                    <th>Guests</th>
+                    <th>Rooms</th>
+                    <th>Arrival</th>
+                    <th>Departure</th>
+                    <th>Total Price</th>
+                    <th>Special Requests</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="booking : ${bookings}">
+                    <td th:text="${booking.resortName}"></td>
+                    <td th:text="${booking.roomType}"></td>
+                    <td th:text="${booking.numberOfGuests}"></td>
+                    <td th:text="${booking.numberOfRooms}"></td>
+                    <td th:text="${#dates.format(booking.arrivalDate, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${#dates.format(booking.departureDate, 'yyyy-MM-dd')}"></td>
+                    <td th:text="|₹ ${booking.totalPrice}|"></td>
+                    <td th:text="${booking.specialRequests}">None</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

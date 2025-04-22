@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Browse Resorts</title>
+    <link rel="stylesheet" th:href="@{/css/resort_card.css}" />
+</head>
+<body>
+    <h2>Available Resorts</h2>
+
+    <div class="room-cards">
+        <div class="card" th:each="resort : ${resorts}">
+            <img th:src="@{/images/resort_default.jpg}" alt="Resort Image" />
+
+            <div class="card-content">
+                <h3 th:text="${resort.name}">Resort Name</h3>
+                <p th:text="${resort.location}">Location</p>
+                <p th:text="${resort.description}">Description</p>
+                <a th:href="@{'/resort/' + ${resort.resortId}}">
+                    <button>View Details</button>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

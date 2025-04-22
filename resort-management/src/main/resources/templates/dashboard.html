@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+<h2>Welcome to your dashboard</h2>
+<p>Email: <span th:text="${user.email}"></span></p>
+<p>Role: <span th:text="${user.role}"></span></p>
+<p><a th:href="@{/resorts}">View Available Resorts</a></p>
+</body>
+</html>
