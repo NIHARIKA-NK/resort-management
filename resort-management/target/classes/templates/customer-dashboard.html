@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, <span th:text="${user.name}">User</span>!</h1>
+    <nav>
+        <a href="/resorts">Browse Resorts</a> |
+        <a href="/my-bookings">My Bookings</a> |
+        <a href="/logout">Logout</a>
+    </nav>
+</body>
+</html>

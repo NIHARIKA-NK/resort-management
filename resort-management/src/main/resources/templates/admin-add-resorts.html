@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Resort</title>
+</head>
+<body>
+    <h1>Add New Resort</h1>
+    <form action="/admin/add-resort" method="post" th:object="${resort}">
+        <label>Name: <input type="text" th:field="*{name}" /></label><br>
+        <label>Location: <input type="text" th:field="*{location}" /></label><br>
+        <label>Description: <textarea th:field="*{description}"></textarea></label><br>
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>

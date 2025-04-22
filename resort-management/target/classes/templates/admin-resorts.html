@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Resorts</title>
+</head>
+<body>
+    <h1>Manage Resorts</h1>
+    <a href="/admin/add-resort">Add New Resort</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th><th>Location</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resort : ${resorts}">
+                <td th:text="${resort.name}">Name</td>
+                <td th:text="${resort.location}">Location</td>
+                <td>
+                    <a th:href="@{'/admin/edit-resort/' + ${resort.id}}">Edit</a> |
+                    <a th:href="@{'/admin/delete-resort/' + ${resort.id}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
